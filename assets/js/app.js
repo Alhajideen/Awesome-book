@@ -1,13 +1,14 @@
 const form = document.querySelector('.book-form');
 const bookTittle = document.querySelector('.tittle');
 const bookAuth = document.querySelector('.author');
-const bookArr = [];
+let bookArr = [];
 const tbody = document.querySelector('.tbody');
 const tableData = document.querySelector('table-data');
 const empty = document.querySelector('.empty-books');
 let ourBooks = JSON.parse(localStorage.getItem('Books'));
 window.addEventListener('load', () => {
   if (ourBooks) {
+    bookArr = JSON.parse(localStorage.getItem('Books'));
     displaytoDom();
     empty.style.display = 'none';
   } else {
@@ -21,7 +22,6 @@ form.addEventListener('submit', (e) => {
     tittle: bookTittle.value,
     author: bookAuth.value,
   };
-  console.log(book)
   bookArr.push(book);
   localStorage.setItem('Books', JSON.stringify(bookArr));
   displaytoDom();
@@ -29,7 +29,7 @@ form.addEventListener('submit', (e) => {
 
 const displaytoDom = () => {
   let tableRow = '';
-  if(ourBooks){
+  if (ourBooks) {
     for (let i = 0; i < ourBooks.length; i++) {
       tableRow += `<tr>
     <td>${ourBooks[i].tittle}</td>
@@ -41,9 +41,16 @@ const displaytoDom = () => {
   }
 };
 
-
 // Script for removing add items
 
 tbody.addEventListener('click', (e) => {
- 
-})
+  const index = e.target.id;
+  const item = bookArr[index];
+  bookArr.filter(()=> {
+    removeItem(item);
+  });
+});
+
+function removeItem (elem) {
+  
+}
