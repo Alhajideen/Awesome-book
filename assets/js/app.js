@@ -7,7 +7,6 @@ const tableData = document.querySelector('table-data');
 const empty = document.querySelector('.empty-books');
 let ourBooks = JSON.parse(localStorage.getItem('Books'));
 window.addEventListener('load', () => {
-  console.log(ourBooks);
   if (ourBooks) {
     displaytoDom();
     empty.style.display = 'none';
@@ -22,20 +21,29 @@ form.addEventListener('submit', (e) => {
     tittle: bookTittle.value,
     author: bookAuth.value,
   };
+  console.log(book)
   bookArr.push(book);
   localStorage.setItem('Books', JSON.stringify(bookArr));
-  displaytoDom();
   displaytoDom();
 });
 
 const displaytoDom = () => {
   let tableRow = '';
-  for (let i = 0; i < ourBooks.length; i++) {
-    tableRow += `<tr>
-  <td>${ourBooks[i].tittle}</td>
-  <td>${ourBooks[i].author}</td>
-  <td><button class="remove-btn">Remove</button></td>
-</tr>`;
+  if(ourBooks){
+    for (let i = 0; i < ourBooks.length; i++) {
+      tableRow += `<tr>
+    <td>${ourBooks[i].tittle}</td>
+    <td>${ourBooks[i].author}</td>
+    <td><button id=${i} class="remove-btn">Remove</button></td>
+  </tr>`;
+    }
+    tbody.innerHTML += tableRow;
   }
-  tbody.innerHTML = tableRow;
 };
+
+
+// Script for removing add items
+
+tbody.addEventListener('click', (e) => {
+ 
+})
