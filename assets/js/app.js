@@ -42,15 +42,14 @@ const displaytoDom = () => {
 };
 
 // Script for removing add items
-
+let item = null;
 tbody.addEventListener('click', (e) => {
   const index = e.target.id;
-  const item = bookArr[index];
-  bookArr.filter(()=> {
-    removeItem(item);
-  });
+  item = bookArr[index];
+  bookArr = bookArr.filter(removeItem);
+  localStorage.setItem('Books', JSON.stringify(bookArr));
 });
 
-function removeItem (elem) {
-  
+function removeItem(elem) {
+  return elem.tittle != item.tittle;
 }
